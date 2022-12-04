@@ -1,14 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FiShoppingCart } from 'react-icons/fi';
+import { useSelector } from 'react-redux';
+
 
 import logoPizza from '../../assets/img/pizza-logo.svg';
 import { Search } from '../Search/Search';
-import { useSelector } from 'react-redux';
-export const Header = ({ searchValue, setSearchValue }) => {
-  const { items, totalPrice } = useSelector((state) => state.cart);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+import { cartSelector } from '../../redux/slices/cartSlice';
 
+export const Header = () => {
+  const { items, totalPrice } = useSelector(cartSelector);
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const { pathname } = useLocation()
   return (
     <div className="header">
       <div className="container">
@@ -25,22 +28,21 @@ export const Header = ({ searchValue, setSearchValue }) => {
             </div>
           </div>
         </Link>
-        <Search
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-        />
+        {pathname !== '/cart' && <Search />}
         <div className="header__cart">
-          <Link
-            to="cart"
-            href="/cart.html"
-            className="button button--cart">
-            <span>{totalPrice} грн</span>
-            <div className="button__delimiter"></div>
-            <FiShoppingCart fontSize={25} />
-            <span>{totalCount}</span>
-          </Link>
+          {pathname !== '/cart' &&
+            <Link
+              to="cart"
+              href="/cart.html"
+              className="button button--cart">
+              <span>{totalPrice} грн</span>
+              <div className="button__delimiter"></div>
+              <FiShoppingCart fontSize={25} />
+              <span>{totalCount}</span>
+            </Link>
+          }
         </div>
       </div>
-    </div>
+    </div >
   );
 };

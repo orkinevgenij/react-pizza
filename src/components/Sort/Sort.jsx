@@ -1,10 +1,9 @@
-import { current } from '@reduxjs/toolkit';
-import React, { useState, useRef } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { AiOutlineArrowUp } from 'react-icons/ai';
 import { AiOutlineArrowDown } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSortType } from '../../redux/slices/filterSlice';
+
+import { setSortType, sortSelector } from '../../redux/slices/filterSlice';
 
 const list = [
   { name: 'По популярности', sortProperty: 'rating' },
@@ -14,9 +13,10 @@ const list = [
 
 export const Sort = ({ onClickOrder }) => {
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filter.sort);
+  const sort = useSelector(sortSelector);
   const [open, setOpen] = useState(false);
   const sortRef = useRef();
+
   const onClickListItem = (obj) => {
     dispatch(setSortType(obj));
     setOpen(false);
