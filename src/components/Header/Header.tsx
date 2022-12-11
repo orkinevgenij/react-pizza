@@ -8,7 +8,7 @@ import logoPizza from '../../assets/img/pizza-logo.svg';
 import { Search } from '../Search/Search';
 import { cartSelector } from '../../redux/slices/cartSlice';
 
-export const Header = () => {
+export const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(cartSelector);
   const { pathname } = useLocation()
   const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
