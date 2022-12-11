@@ -1,6 +1,5 @@
 import { RootState } from './../store/store';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 export type TItems = {

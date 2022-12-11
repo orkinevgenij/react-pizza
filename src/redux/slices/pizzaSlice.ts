@@ -9,7 +9,6 @@ type TFetchPizzasArgs = {
   category: string;
   search: string;
   currentPage: number;
-
 }
 
 
