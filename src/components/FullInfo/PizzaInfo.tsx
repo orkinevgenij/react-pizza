@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useState } from 'react'
 import styles from './PizzaInfo.module.scss'
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-export const PizzaInfo = () => {
 
-    const [pizzaInfo, setPizzaInfo] = useState([])
+export const PizzaInfo: React.FC = () => {
+
+    const [pizzaInfo, setPizzaInfo] = useState<
+        {
+            imageUrl: string;
+            title: string;
+            price: number;
+            info: string;
+        }>()
+
     const { id } = useParams()
     const navigate = useNavigate()
     useEffect(() => {
@@ -21,6 +30,9 @@ export const PizzaInfo = () => {
         }
         fetchPizza()
     }, [])
+    if (!pizzaInfo) {
+        return <p> Загрузка...</p>
+    }
     return (
         <div className={styles.root}>
             <div className={styles.pizzaImg}>

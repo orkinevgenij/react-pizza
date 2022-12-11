@@ -8,8 +8,6 @@ body {
 }
 
 
-
-
 .wrapper {
   width: calc(100vw - 100px);
   height: 100%;
@@ -236,13 +234,6 @@ body {
       justify-content: space-between;
       width: 13%;
 
-      &-minus {
-        svg {
-          path:first-of-type {
-            display: none;
-          }
-        }
-      }
 
       b {
         font-size: 22px;
@@ -273,8 +264,6 @@ body {
       }
 
       svg {
-        transform: rotate(45deg);
-
         path {
           fill: darken($color: $gray-line, $amount: 15);
         }

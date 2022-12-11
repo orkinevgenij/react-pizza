@@ -10,8 +10,8 @@ import { cartSelector } from '../../redux/slices/cartSlice';
 
 export const Header = () => {
   const { items, totalPrice } = useSelector(cartSelector);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const { pathname } = useLocation()
+  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
   return (
     <div className="header">
       <div className="container">
@@ -23,7 +23,7 @@ export const Header = () => {
               alt="Pizza logo"
             />
             <div>
-              <h1>React Pizza</h1>
+              <h1>Pizza</h1>
               <p>самая вкусная пицца во вселенной</p>
             </div>
           </div>
@@ -33,10 +33,8 @@ export const Header = () => {
           {pathname !== '/cart' &&
             <Link
               to="cart"
-              href="/cart.html"
               className="button button--cart">
               <span>{totalPrice} грн</span>
-              <div className="button__delimiter"></div>
               <FiShoppingCart fontSize={25} />
               <span>{totalCount}</span>
             </Link>

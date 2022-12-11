@@ -4,27 +4,34 @@ import { FiPlus } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { addCartItem, cartSelector, cartSelectorById } from '../../redux/slices/cartSlice';
+import { addCartItem, TItems, cartSelectorById } from '../../redux/slices/cartSlice';
+
+type PizzaBlockProps = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[],
+  types: number[];
+}
 
 const typesNames = ['тонкое', 'традиционное'];
 
-export const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
-  // const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id && obj.size));
   const cartItems = useSelector(cartSelectorById(id))
-  const addedCount = cartItems.reduce((sum, item) => sum + item.count, 0);
-  // const addedCount = cartItem ? cartItem.count : 0;
-
+  const addedCount = cartItems.reduce((sum: number, item: any) => sum + item.count, 0);
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
-  const onClickAdd = () => {
-    const item = {
+  const onClickAddToCart = () => {
+    const item: TItems = {
       id,
       title,
       price,
       imageUrl,
       type: typesNames[activeType],
       size: sizes[activeSize],
+      count: 0,
     };
     dispatch(addCartItem(item));
   };
@@ -38,8 +45,8 @@ export const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
             src={imageUrl}
             alt="Pizza"
           />
+          <h5 className="pizza-block__title">{title}</h5>
         </Link>
-        <h4 className="pizza-block__title">{title}</h4>
         <div className="pizza-block__selector">
           <ul>
             {types.map((typeId) => (
@@ -63,7 +70,7 @@ export const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
           </ul>
         </div>
         <div
-          onClick={onClickAdd}
+          onClick={onClickAddToCart}
           className="pizza-block__bottom">
           <div className="pizza-block__price">от {price} грн</div>
           <div className="button button--outline button--add">

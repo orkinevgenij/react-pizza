@@ -1,10 +1,5 @@
 import React from 'react';
 import { NotFoundBlock } from '../components/NotFoundBlock/NotFoundBlock';
 
-export const NotFound = () => {
-  return (
-    <>
-      <NotFoundBlock />
-    </>
-  );
-};
+export const NotFound: React.FC = () => <NotFoundBlock />
+

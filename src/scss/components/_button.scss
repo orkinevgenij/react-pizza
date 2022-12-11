@@ -9,10 +9,10 @@
   text-align: center;
   margin-left: 10px;
   cursor: pointer;
-  transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
   border: 1px solid transparent;
-  @include noselect();
   position: relative;
+
+
 
   .button-icon {
     font-size: 18px;
@@ -42,6 +42,7 @@
     background-color: darken($orange, 12%);
     transform: translateY(1px);
   }
+
 
   &--circle {
     display: flex;
@@ -98,13 +99,7 @@
     }
   }
 
-  &__delimiter {
-    width: 1px;
-    height: 25px;
-    background-color: rgba(255, 255, 255, 0.25);
-    margin-left: 14px;
-    margin-right: 14px;
-  }
+
 
   &--add {
     svg {
