@@ -1,28 +1,33 @@
-import './scss/app.scss';
-import { Route, Routes } from 'react-router-dom';
+import './scss/app.scss'
+import { Route, Routes } from 'react-router-dom'
 
-import { Home } from './pages/Home';
-import { NotFound } from './pages/NotFound';
-import { Cart } from './pages/Cart';
-import { PizzaInfo } from './components/FullInfo/PizzaInfo';
-import { MainLayout } from './components/MainLayout/MainLayout';
-
+import { Home } from './pages/Home'
+import { NotFound } from './pages/NotFound'
+import { Cart } from './pages/Cart'
+import { PizzaInfo } from './components/FullInfo/PizzaInfo'
+import { MainLayout } from './components/MainLayout/MainLayout'
 
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<MainLayout />}>
+      <Route
+        path='/'
+        element={<MainLayout />}
+      >
         <Route
           path=''
           element={<Home />}
         />
         <Route
-          path="/cart"
+          path='/cart'
           element={<Cart />}
         />
-        <Route path={'/pizza/:id'} element={<PizzaInfo />} />
         <Route
-          path="*"
+          path={'/pizza/:id'}
+          element={<PizzaInfo />}
+        />
+        <Route
+          path='*'
           element={<NotFound />}
         />
       </Route>
@@ -30,4 +35,4 @@ function App() {
   )
 }
 
-export default App;
+export default App

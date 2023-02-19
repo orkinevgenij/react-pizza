@@ -25,10 +25,10 @@ const initialState: IFilterSliceState = {
   categoryId: 0,
   currentPage: 1,
   sort: {
-    name: 'По популярности',
+    name: 'За популярністю',
     sortProperty: SortPropertyEnum.RATING,
   },
-};
+}
 const filterSlice = createSlice({
   name: 'filters',
   initialState,

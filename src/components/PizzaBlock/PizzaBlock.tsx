@@ -1,28 +1,37 @@
-import React from 'react';
-import { useState } from 'react';
-import { FiPlus } from 'react-icons/fi';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useSet } from 'ahooks'
+import React, { useEffect } from 'react'
+import { useState } from 'react'
+import { FiPlus } from 'react-icons/fi'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import { addCartItem, TItems, cartSelectorById } from '../../redux/slices/cartSlice';
+import { addCartItem, TItems, cartSelectorById } from '../../redux/slices/cartSlice'
 
 type PizzaBlockProps = {
-  id: string;
-  title: string;
-  price: number;
-  imageUrl: string;
-  sizes: number[],
-  types: number[];
+  id: string
+  title: string
+  price: number
+  imageUrl: string
+  sizes: number[]
+  types: number[]
 }
 
-const typesNames = ['тонкое', 'традиционное'];
+const typesNames = ['тонке', 'традиційне']
 
-export const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, sizes, types }) => {
-  const dispatch = useDispatch();
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({
+  id,
+  title,
+  price,
+  imageUrl,
+  sizes,
+  types,
+}) => {
+  const dispatch = useDispatch()
   const cartItems = useSelector(cartSelectorById(id))
-  const addedCount = cartItems.reduce((sum: number, item: any) => sum + item.count, 0);
-  const [activeType, setActiveType] = useState(0);
-  const [activeSize, setActiveSize] = useState(0);
+  const addedCount = cartItems.reduce((sum: number, item: any) => sum + item.count, 0)
+  const [activeType, setActiveType] = useState(0)
+  const [activeSize, setActiveSize] = useState(0)
+
   const onClickAddToCart = () => {
     const item: TItems = {
       id,
@@ -32,28 +41,32 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageU
       type: typesNames[activeType],
       size: sizes[activeSize],
       count: 0,
-    };
-    dispatch(addCartItem(item));
-  };
+    }
+    dispatch(addCartItem(item))
+  }
+
   return (
-    <div className="pizza-block-wrapper">
-      <div className="pizza-block">
-        <Link key={id}
-          to={`/pizza/${id}`}>
+    <div className='pizza-block-wrapper'>
+      <div className='pizza-block'>
+        <Link
+          key={id}
+          to={`/pizza/${id}`}
+        >
           <img
-            className="pizza-block__image"
+            className='pizza-block__image'
             src={imageUrl}
-            alt="Pizza"
+            alt='Pizza'
           />
-          <h5 className="pizza-block__title">{title}</h5>
+          <h5 className='pizza-block__title'>{title}</h5>
         </Link>
-        <div className="pizza-block__selector">
+        <div className='pizza-block__selector'>
           <ul>
-            {types.map((typeId) => (
+            {types.map(typeId => (
               <li
                 onClick={() => setActiveType(typeId)}
                 className={activeType === typeId ? 'active' : ''}
-                key={typeId}>
+                key={typeId}
+              >
                 {typesNames[typeId]}
               </li>
             ))}
@@ -63,7 +76,8 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageU
               <li
                 onClick={() => setActiveSize(index)}
                 className={activeSize === index ? 'active' : ''}
-                key={index}>
+                key={index}
+              >
                 {size}
               </li>
             ))}
@@ -71,15 +85,16 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageU
         </div>
         <div
           onClick={onClickAddToCart}
-          className="pizza-block__bottom">
-          <div className="pizza-block__price">от {price} грн</div>
-          <div className="button button--outline button--add">
-            <FiPlus className="button-icon" />
-            <span>Добавить</span>
+          className='pizza-block__bottom'
+        >
+          <div className='pizza-block__price'>вiд {price} грн</div>
+          <div className='button button--outline button--add'>
+            <FiPlus className='button-icon' />
+            <span>Додати</span>
             {addedCount > 0 && <i>{addedCount}</i>}
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

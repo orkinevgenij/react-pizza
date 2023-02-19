@@ -1,14 +1,13 @@
-import React from 'react';
-import styles from './NotFoundBlock.module.scss';
+import React from 'react'
+import styles from './NotFoundBlock.module.scss'
 
 export const NotFoundBlock: React.FC = () => (
   <div className={styles.root}>
     <h1>
       <span>😕</span>
       <br />
-      Ничего не найдено
+      Нічого не знайдено
     </h1>
-    <p className="discription"> К сожалению данные страницы отсутствуют в нашем магазине</p>
+    <p className='discription'>На жаль, дані сторінки відсутні в нашому магазині</p>
   </div>
-
 )
